@@ -11,7 +11,7 @@ export default {
       },
       gridTemplateColumns: {
         "5-1-5": "5fr 1fr 5fr",
-        "1-8-1": "1fr 8fr 1fr",
+        "1-1-8-2": "1fr 1fr 8fr 2fr",
       },
       colors: {
         grey: "#0C0C0F",

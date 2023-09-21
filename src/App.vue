@@ -2,17 +2,27 @@
 import { Ref, ref } from "vue";
 import Input from "./components/Input.vue";
 import TodoItem from "./components/TodoItem.vue";
-import { Todo } from "./types/todo";
+import { Todo, Priority } from "./types/todo";
+import PrioritySelect from "./components/PrioritySelect.vue";
+import { v4 as uuidv4 } from "uuid";
 
 let todos: Ref<Array<Todo>> = ref([]);
 
 let title: Ref<string> = ref("");
-let due: Ref<string> = ref("");
+let due: Ref<Date> = ref(new Date());
+let priority: Ref<Priority> = ref(Priority.Niedrig);
 
 function addTodo() {
-  console.log(title.value);
-  todos.value.push({ id: "123", title: title.value, checked: false });
-  console.log(todos.value);
+  todos.value.push({
+    id: uuidv4(),
+    title: title.value,
+    due: due.value,
+    priority: priority.value,
+  });
+}
+
+function removeTodoFromList(id: string) {
+  todos.value = todos.value.filter((i) => i.id !== id);
 }
 </script>
 <!-- GREEN AND ORANGE 
@@ -34,7 +44,10 @@ function addTodo() {
       <section
         class="rounded-2xl h-1/2 w-3/4 m-auto bg-[#f9f4f4] p-5 shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex justify-center"
       >
-        <form class="grid grid-cols-1 w-1/2 m-auto h-fit items-center gap-y-12">
+        <form
+          @keyup.enter="addTodo"
+          class="grid grid-cols-1 w-1/2 m-auto h-fit items-center gap-y-12"
+        >
           <section>
             <!-- Titel -->
             <Input
@@ -49,11 +62,17 @@ function addTodo() {
             <Input
               v-model="due"
               @update:model-value="(f) => (due = f)"
-              :value="due"
-              type="text"
+              type="date"
               id="fällig"
-              placeholder="Fälligkeitsdatum"
+              placeholder="Fälligkeitsdatum (optional)"
               label="Fälligkeitsdatum"
+            />
+
+            <PrioritySelect
+              v-model="priority"
+              @update:model-value="(p) => (priority = p)"
+              id="prio"
+              label="Priorität"
             />
           </section>
 
@@ -99,7 +118,12 @@ function addTodo() {
       <section
         class="grid auto-rows-[12%] gap-y-[3%] shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-tl-2xl rounded-bl-2xl h-1/2 m-auto w-3/4 bg-[#f9f4f4] p-5 overflow-y-scroll"
       >
-        <TodoItem v-for="todo in todos" :todo="todo" :key="todo.id" />
+        <TodoItem
+          v-for="todo in todos"
+          :todo="todo"
+          :key="todo.id"
+          @delete-todo="removeTodoFromList"
+        />
       </section>
     </section>
   </div>
