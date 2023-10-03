@@ -16,6 +16,12 @@ export default {
       colors: {
         grey: "#0C0C0F",
       },
+      backgroundColor: {
+        offwhite: "#f9f4f4",
+      },
+      borderColor: {
+        grey: "#0C0C0F",
+      },
     },
   },
   plugins: [],
