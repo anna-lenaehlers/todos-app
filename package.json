@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev --mode development",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
@@ -15,6 +15,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@types/uuid": "^9.0.4",
+    "axios": "^1.5.1",
+    "cors": "^2.8.5",
     "uuid": "^9.0.1",
     "vue": "^3.3.4"
   },

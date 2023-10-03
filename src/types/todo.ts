@@ -1,10 +1,18 @@
-type Todo = {
-  id: string;
+class Todo {
   title: string;
   priority: Priority;
-  checked?: boolean;
-  due?: Date;
-};
+  checked: boolean;
+  due: number;
+  created: number;
+
+  constructor(title: string, priority: Priority, due: number) {
+    this.title = title;
+    this.priority = priority;
+    this.checked = false;
+    this.due = due;
+    this.created = new Date().getTime();
+  }
+}
 
 enum Priority {
   Niedrig = "Niedrig",
@@ -12,5 +20,4 @@ enum Priority {
   Hoch = "Hoch",
 }
 
-export type { Todo };
-export { Priority };
+export { Todo, Priority };
