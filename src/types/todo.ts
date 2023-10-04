@@ -1,11 +1,11 @@
 class Todo {
   title: string;
-  priority: Priority;
+  priority: string;
   checked: boolean;
   due: number;
   created: number;
 
-  constructor(title: string, priority: Priority, due: number) {
+  constructor(title: string, priority: string, due: number) {
     this.title = title;
     this.priority = priority;
     this.checked = false;
