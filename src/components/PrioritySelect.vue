@@ -3,11 +3,11 @@ import { Ref, ref } from "vue";
 import { Priority } from "../types/todo";
 
 const props = defineProps<{
-  modelValue: Priority;
+  modelValue: string;
   id: string;
   label: string;
   required: boolean;
-  inputValue?: Priority;
+  inputValue?: string;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);

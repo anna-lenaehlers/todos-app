@@ -2,7 +2,7 @@
 import { Ref, onMounted, ref } from "vue";
 import Input from "./components/Input.vue";
 import TodoItem from "./components/TodoItem.vue";
-import { Todo, Priority } from "./types/todo";
+import { Todo } from "./types/todo";
 import PrioritySelect from "./components/PrioritySelect.vue";
 import { sortByPrio, sortByDue, sortByCreated } from "./helpers/sortHelpers";
 import Modal from "./components/Modal.vue";
@@ -15,7 +15,7 @@ let currentTodo: any = ref({});
 
 let title: Ref<string> = ref("");
 let due: Ref<number> = ref(0);
-let priority: Ref<Priority> = ref(Priority.Niedrig);
+let priority: Ref<string> = ref("Niedrig");
 let modalIsOpen: Ref<boolean> = ref(false);
 
 let sortCatgories: Ref<{
@@ -31,6 +31,7 @@ let sortCatgories: Ref<{
 async function addTodo() {
   try {
     const newTodo = new Todo(title.value, priority.value, due.value);
+    console.log(newTodo);
     await createTodo(newTodo);
     todos.value = await getAllTodos();
   } catch (error: any) {
@@ -89,13 +90,6 @@ onMounted(async () => {
   <div
     class="font-ptsans w-full h-screen bg-gradient-to-t from-[#BBD8B3] to-[#EA8C55]"
   >
-    <!-- <nav class="w-full flex text-grey absolute">
-      <img
-        src="./assets/images/logos/Logo_200x200_dark.svg"
-        class="w-20 self-center p-2"
-        alt=""
-      />
-    </nav> -->
     <section
       class="grid grid-cols-5-1-5 gap-x-6 w-3/4 my-0 mx-auto h-screen justify-self-center"
     >
