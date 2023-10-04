@@ -6,12 +6,12 @@ const props = defineProps<{
   id: string;
   label: string;
   required: boolean;
-  inputValue?: string;
+  inputValue: string;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);
 
-const value: Ref<string> = ref(props.inputValue!);
+const value: Ref<string> = ref(props.inputValue);
 
 function updateSelect() {
   emit("update:modelValue", value);

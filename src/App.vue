@@ -30,6 +30,7 @@ let sortCatgories: Ref<{
 
 async function addTodo() {
   try {
+    console.log(priority.value);
     const newTodo = new Todo(title.value, priority.value, due.value);
     console.log(newTodo);
     await createTodo(newTodo);
@@ -128,6 +129,7 @@ onMounted(async () => {
               id="prio"
               label="Priorität"
               :required="true"
+              :input-value="''"
             />
           </section>
 
