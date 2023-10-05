@@ -22,7 +22,7 @@ if (props.inputValue) {
 }
 
 function updateSelect() {
-  emit("update:modelValue", value);
+  emit("update:modelValue", value.value);
 }
 </script>
 
