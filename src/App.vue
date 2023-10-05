@@ -129,7 +129,6 @@ onMounted(async () => {
               id="prio"
               label="Priorität"
               :required="true"
-              :input-value="''"
             />
           </section>
 
