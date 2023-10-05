@@ -6,12 +6,20 @@ const props = defineProps<{
   id: string;
   label: string;
   required: boolean;
-  inputValue: string;
+  inputValue?: string;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);
 
-const value: Ref<string> = ref(props.inputValue);
+let value: Ref<string>;
+
+if (props.inputValue) {
+  console.log("inputValue exists");
+  value = ref(props.inputValue);
+} else {
+  console.log("inputValue does not exist");
+  value = ref("");
+}
 
 function updateSelect() {
   emit("update:modelValue", value);
@@ -22,12 +30,17 @@ function updateSelect() {
   <section class="relative mb-6">
     <select
       v-model="value"
-      @input="updateSelect"
+      @change="updateSelect"
       :id="id"
       :required="required"
       class="pl-2 peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
     >
-      <option v-for="item in ['Hoch', 'Mittel', 'Niedrig']">{{ item }}</option>
+      <option value="not-selected" disabled selected>
+        Wie wichtig ist diese Aufgabe?
+      </option>
+      <option v-for="item in ['Hoch', 'Mittel', 'Niedrig']">
+        {{ item }}
+      </option>
     </select>
     <label
       :for="id"
